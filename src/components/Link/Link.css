@@ -1,0 +1,16 @@
+.link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-text-primary);
+  text-decoration: underline;
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  font-weight: var(--body-weight);
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
