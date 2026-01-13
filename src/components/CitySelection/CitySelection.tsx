@@ -1,8 +1,9 @@
-import { useMemo, useCallback } from "react";
+import { useCallback } from "react";
 import "./CitySelection.css";
-import { Link } from "../Link";
-import { CitySearch } from "../CitySearch";
-import type { City } from "@/contexts";
+import { Link } from "@/components/Link";
+import { CitySearch } from "@/components/CitySearch";
+import { RemoveIcon } from "@/components/Icons";
+import type { City } from "@/lib/types";
 
 type CitySelectionProps = {
   cities: City[];
@@ -30,34 +31,11 @@ export function CitySelection({
     return city.name;
   }, []);
 
-  // Memoize remove handler
   const handleRemove = useCallback(
     (cityId: string) => {
       onRemove?.(cityId);
     },
     [onRemove]
-  );
-
-  // Memoize remove icon SVG
-  const removeIcon = useMemo(
-    () => (
-      <svg
-        width="12"
-        height="12"
-        viewBox="0 0 12 12"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M9 3L3 9M3 3L9 9"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    []
   );
 
   return (
@@ -75,7 +53,7 @@ export function CitySelection({
                 className="city-selection__pill-remove"
                 aria-label={`Remove ${city.name}`}
               >
-                {removeIcon}
+                <RemoveIcon />
               </button>
             )}
           </div>

@@ -1,6 +1,6 @@
 import "./Header.css";
 
-import { Dropdown } from "./Dropdown";
+import { Dropdown } from "@/components/Header/Dropdown";
 import logoPretto from "@/assets/svg/logo-pretto.svg";
 
 export function Header() {

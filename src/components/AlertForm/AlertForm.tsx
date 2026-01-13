@@ -1,13 +1,14 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import "./AlertForm.css";
-import { CitySelection } from "../CitySelection";
-import { Checkbox } from "../Checkbox";
-import { Radio } from "../Radio";
-import { Button } from "../Button";
-import { Link } from "../Link";
+import { CitySelection } from "@/components/CitySelection";
+import { Checkbox } from "@/components/Checkbox";
+import { Radio } from "@/components/Radio";
+import { Button } from "@/components/Button";
+import { Link } from "@/components/Link";
 import { useAlertForm } from "@/contexts";
-import { AlertFormSection } from "./AlertFormSection";
+import { AlertFormSection } from "@/components/AlertForm/AlertFormSection";
 import { Title } from "@/components/Title";
+import { SALE_TYPES, PROPERTY_TYPES } from "@/lib/constants";
 
 type AlertFormProps = {
   className?: string;
@@ -16,85 +17,15 @@ type AlertFormProps = {
 export function AlertForm({ className = "" }: AlertFormProps) {
   const { state, actions } = useAlertForm();
 
-  // Memoized handlers
-  const handleSave = useCallback(
-    (e: React.FormEvent) => {
-      e.preventDefault();
-      alert("Modifications sauvegardées");
-    },
-    []
-  );
+  const handleSave = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    alert("Modifications sauvegardées");
+  }, []);
 
   const handleDelete = useCallback(() => {
     alert("Alerte supprimée");
     actions.resetForm();
   }, [actions]);
-
-  const handlePropertyTypeToggle = useCallback(
-    (type: "apartment" | "house") => {
-      actions.togglePropertyType(type);
-    },
-    [actions]
-  );
-
-  const handleSaleTypeChange = useCallback(
-    (value: string) => {
-      actions.setSaleType(value);
-    },
-    [actions]
-  );
-
-  // Memoize checkbox props
-  const apartmentCheckboxProps = useMemo(
-    () => ({
-      id: "apartment",
-      name: "property-type",
-      checked: state.propertyTypes.apartment,
-      onChange: () => {
-        handlePropertyTypeToggle("apartment");
-      },
-      label: "Appartement",
-    }),
-    [state.propertyTypes.apartment, handlePropertyTypeToggle]
-  );
-
-  const houseCheckboxProps = useMemo(
-    () => ({
-      id: "house",
-      name: "property-type",
-      checked: state.propertyTypes.house,
-      onChange: () => {
-        handlePropertyTypeToggle("house");
-      },
-      label: "Maison",
-    }),
-    [state.propertyTypes.house, handlePropertyTypeToggle]
-  );
-
-  // Memoize radio props
-  const newRadioProps = useMemo(
-    () => ({
-      id: "new",
-      name: "sale-type",
-      value: "new",
-      checked: state.saleType === "new",
-      onChange: () => handleSaleTypeChange("new"),
-      label: "Neuf",
-    }),
-    [state.saleType, handleSaleTypeChange]
-  );
-
-  const oldRadioProps = useMemo(
-    () => ({
-      id: "old",
-      name: "sale-type",
-      value: "old",
-      checked: state.saleType === "old",
-      onChange: () => handleSaleTypeChange("old"),
-      label: "Ancien",
-    }),
-    [state.saleType, handleSaleTypeChange]
-  );
 
   return (
     <form className={`alert-form ${className}`.trim()} onSubmit={handleSave}>
@@ -114,15 +45,41 @@ export function AlertForm({ className = "" }: AlertFormProps) {
 
         <AlertFormSection title="Type de bien">
           <div className="alert-form__options">
-            <Checkbox {...apartmentCheckboxProps} />
-            <Checkbox {...houseCheckboxProps} />
+            <Checkbox
+              id={PROPERTY_TYPES.APARTMENT}
+              name="property-type"
+              checked={state.propertyTypes.apartment}
+              onChange={() => actions.togglePropertyType(PROPERTY_TYPES.APARTMENT)}
+              label="Appartement"
+            />
+            <Checkbox
+              id={PROPERTY_TYPES.HOUSE}
+              name="property-type"
+              checked={state.propertyTypes.house}
+              onChange={() => actions.togglePropertyType(PROPERTY_TYPES.HOUSE)}
+              label="Maison"
+            />
           </div>
         </AlertFormSection>
 
         <AlertFormSection title="Type de vente">
           <div className="alert-form__options">
-            <Radio {...newRadioProps} />
-            <Radio {...oldRadioProps} />
+            <Radio
+              id={SALE_TYPES.NEW}
+              name="sale-type"
+              value={SALE_TYPES.NEW}
+              checked={state.saleType === SALE_TYPES.NEW}
+              onChange={() => actions.setSaleType(SALE_TYPES.NEW)}
+              label="Neuf"
+            />
+            <Radio
+              id={SALE_TYPES.OLD}
+              name="sale-type"
+              value={SALE_TYPES.OLD}
+              checked={state.saleType === SALE_TYPES.OLD}
+              onChange={() => actions.setSaleType(SALE_TYPES.OLD)}
+              label="Ancien"
+            />
           </div>
         </AlertFormSection>
 
