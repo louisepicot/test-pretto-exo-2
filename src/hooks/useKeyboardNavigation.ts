@@ -24,9 +24,7 @@ export function useKeyboardNavigation<T extends HTMLElement = HTMLElement>({
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       if (e.key === "ArrowDown") {
         e.preventDefault();
-        setSelectedIndex((prev) =>
-          prev < itemsCount - 1 ? prev + 1 : prev
-        );
+        setSelectedIndex((prev) => (prev < itemsCount - 1 ? prev + 1 : prev));
       } else if (e.key === "ArrowUp") {
         e.preventDefault();
         setSelectedIndex((prev) => (prev > 0 ? prev - 1 : -1));
