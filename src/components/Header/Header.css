@@ -1,0 +1,35 @@
+.header {
+  background-color: var(--color-bg-primary);
+  width: 100%;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.header__container > div {
+  padding: var(--space-6);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.header__logo img {
+  height: 24px;
+  width: auto;
+}
+
+/* Desktop: Show navigation links */
+@media (min-width: 1440px) {
+  .header__nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-4);
+  }
+}
