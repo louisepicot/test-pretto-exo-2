@@ -1,0 +1,69 @@
+:root {
+  /* Font */
+  --font-sans: "Roboto", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+
+  /* Text styles (semantic + reused) */
+  --title-size: 2rem; /* 32px */
+  --title-line: 1.25; /* 40/32 */
+  --title-weight: 900;
+
+  --body-size: 1rem; /* 16px */
+  --body-line: 1.5; /* 24/16 */
+  --body-weight: 400;
+
+  --body-strong-weight: 600; /* used for "Gratuite", etc. */
+
+  --card-title-size: 1rem; /* 16px */
+  --card-title-line: 1.5; /* 24/16 */
+  --card-title-weight: 600;
+
+  --button-size: 1.125rem; /* 18px */
+  --button-line: 1.5556; /* 28/18 */
+  --button-weight: 600;
+
+  --caption-size: 0.75rem; /* 12px */
+  --caption-line: 1.3333; /* 16/12 */
+  --caption-weight: 400;
+  --caption-letter: 0.02em; /* 2% */
+}
+
+/* Apply base font once */
+body {
+  font-family: var(--font-sans);
+}
+
+/* Reusable classes */
+.text-title {
+  font-size: var(--title-size);
+  line-height: var(--title-line);
+  font-weight: var(--title-weight);
+}
+
+.text-body {
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  font-weight: var(--body-weight);
+}
+
+.text-body-strong {
+  font-weight: var(--body-strong-weight);
+}
+
+.text-card-title {
+  font-size: var(--card-title-size);
+  line-height: var(--card-title-line);
+  font-weight: var(--card-title-weight);
+}
+
+.text-button {
+  font-size: var(--button-size);
+  line-height: var(--button-line);
+  font-weight: var(--button-weight);
+}
+
+.text-caption {
+  font-size: var(--caption-size);
+  line-height: var(--caption-line);
+  font-weight: var(--caption-weight);
+  letter-spacing: var(--caption-letter);
+}
