@@ -1,13 +1,12 @@
-import "./Checkbox.css";
+import "@/components/Checkbox/Checkbox.css";
 import { CheckmarkIcon } from "@/components/Icons";
 
 type CheckboxProps = {
   checked: boolean;
   label: string;
-  onChange?: () => void;
+  onChange: () => void;
   id?: string;
   name?: string;
-  className?: string;
 };
 
 export function Checkbox({
@@ -16,28 +15,19 @@ export function Checkbox({
   onChange,
   id,
   name,
-  className = "",
 }: CheckboxProps) {
-  const handleChange = () => {
-    onChange?.();
-  };
-
   return (
-    <div className={`checkbox ${className}`.trim()}>
+    <div className="checkbox">
       <input
         type="checkbox"
         id={id}
         name={name}
         checked={checked}
-        onChange={handleChange}
+        onChange={onChange}
         className="checkbox__input"
       />
       <label htmlFor={id} className="checkbox__label">
-        <span className="checkbox__box">
-          {checked && (
-            <CheckmarkIcon className="checkbox__checkmark" />
-          )}
-        </span>
+        <span className="checkbox__box">{checked && <CheckmarkIcon />}</span>
         <span className="checkbox__text">{label}</span>
       </label>
     </div>

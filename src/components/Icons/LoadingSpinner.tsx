@@ -1,16 +1,14 @@
 type LoadingSpinnerProps = {
   size?: number;
-  className?: string;
   "aria-label"?: string;
 };
 
 export function LoadingSpinner({
   size = 16,
-  className = "",
   "aria-label": ariaLabel = "Loading",
 }: LoadingSpinnerProps) {
   return (
-    <div className={className} aria-label={ariaLabel}>
+    <div aria-label={ariaLabel}>
       <svg
         width={size}
         height={size}

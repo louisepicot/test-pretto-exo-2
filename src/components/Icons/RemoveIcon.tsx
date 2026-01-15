@@ -1,9 +1,8 @@
 type RemoveIconProps = {
   size?: number;
-  className?: string;
 };
 
-export function RemoveIcon({ size = 12, className = "" }: RemoveIconProps) {
+export function RemoveIcon({ size = 12 }: RemoveIconProps) {
   return (
     <svg
       width={size}
@@ -11,7 +10,6 @@ export function RemoveIcon({ size = 12, className = "" }: RemoveIconProps) {
       viewBox="0 0 12 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
     >
       <path
         d="M9 3L3 9M3 3L9 9"

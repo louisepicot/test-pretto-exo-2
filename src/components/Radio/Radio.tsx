@@ -1,4 +1,4 @@
-import "./Radio.css";
+import "@/components/Radio/Radio.css";
 
 type RadioProps = {
   checked: boolean;
@@ -7,7 +7,6 @@ type RadioProps = {
   id?: string;
   name?: string;
   value?: string;
-  className?: string;
 };
 
 export function Radio({
@@ -17,10 +16,9 @@ export function Radio({
   id,
   name,
   value,
-  className = "",
 }: RadioProps) {
   return (
-    <div className={`radio ${className}`.trim()}>
+    <div className="radio">
       <input
         type="radio"
         id={id}

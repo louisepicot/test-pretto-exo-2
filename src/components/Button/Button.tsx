@@ -1,11 +1,10 @@
-import "./Button.css";
+import "@/components/Button/Button.css";
 
 type ButtonProps = {
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: "primary" | "secondary";
   type?: "button" | "submit" | "reset";
-  className?: string;
 };
 
 export function Button({
@@ -13,13 +12,12 @@ export function Button({
   onClick,
   variant = "primary",
   type = "button",
-  className = "",
 }: ButtonProps) {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`button button--${variant} ${className}`.trim()}
+      className={`button button--${variant}`}
     >
       {children}
     </button>

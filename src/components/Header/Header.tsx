@@ -1,4 +1,4 @@
-import "./Header.css";
+import "@/components/Header/Header.css";
 
 import { Dropdown } from "@/components/Header/Dropdown";
 import logoPretto from "@/assets/svg/logo-pretto.svg";

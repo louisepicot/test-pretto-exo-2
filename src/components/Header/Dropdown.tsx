@@ -1,13 +1,9 @@
-import "./Dropdown.css";
+import "@/components/Header/Dropdown.css";
 import { BurgerMenuIcon } from "@/components/Header/BurgerMenuIcon";
 
-export type DropdownProps = {
-  className?: string;
-};
-
-export function Dropdown({ className = "" }: DropdownProps) {
+export function Dropdown() {
   return (
-    <div className={`dropdown ${className}`.trim()}>
+    <div className="dropdown">
       <button type="button" className="dropdown__mobile" aria-label="Menu">
         <BurgerMenuIcon size={24} color="var(--color-text-primary)" />
       </button>

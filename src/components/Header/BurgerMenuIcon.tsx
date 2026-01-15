@@ -1,14 +1,9 @@
 type BurgerMenuIconProps = {
   size?: number;
-  className?: string;
   color?: string;
 };
 
-export function BurgerMenuIcon({
-  size = 24,
-  className,
-  color,
-}: BurgerMenuIconProps) {
+export function BurgerMenuIcon({ size = 24, color }: BurgerMenuIconProps) {
   return (
     <svg
       width={size}
@@ -16,7 +11,6 @@ export function BurgerMenuIcon({
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className={className}
       aria-hidden="true"
     >
       <path

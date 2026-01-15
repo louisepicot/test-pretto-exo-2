@@ -1,3 +1,3 @@
-export { Header } from "./Header";
-export { Dropdown } from "./Dropdown";
-export type { DropdownProps } from "./Dropdown";
+export { Header } from "@/components/Header/Header";
+export { Dropdown } from "@/components/Header/Dropdown";
+export type { DropdownProps } from "@/components/Header/Dropdown";
