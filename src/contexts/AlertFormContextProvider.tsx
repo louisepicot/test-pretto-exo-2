@@ -1,17 +1,22 @@
-import { useState, useCallback, useMemo, type ReactNode } from "react";
-import { AlertFormContext } from "@/contexts/AlertFormContext";
+import {
+  useState,
+  useCallback,
+  useMemo,
+  type ReactNode,
+  createContext,
+} from "react";
+
 import type {
   City,
   AlertFormState,
-  AlertFormContextValue,
   PropertyType,
   SaleType,
+  PropertyTypes,
 } from "@/lib/types";
 import { SALE_TYPES } from "@/lib/constants";
 
 const INITIAL_STATE: AlertFormState = {
   cities: [{ id: "1", name: "Lyon", postalCode: "69007" }],
-  showCitySearch: false,
   propertyTypes: {
     apartment: true,
     house: false,
@@ -24,6 +29,26 @@ type AlertFormProviderProps = {
   initialState?: Partial<AlertFormState>;
 };
 
+type AlertFormContextValue = {
+  state: AlertFormState;
+  addCity: (city: City) => void;
+  removeCity: (cityId: string) => void;
+  togglePropertyType: (type: PropertyType) => void;
+  setSaleType: (type: SaleType) => void;
+  resetForm: () => void;
+  getFormData: () => {
+    cities: Array<{ name: string; postalCode: string }>;
+    propertyTypes: PropertyTypes;
+    saleType: SaleType;
+  };
+  saveForm: () => void;
+  deleteAlert: () => void;
+};
+
+export const AlertFormContext = createContext<AlertFormContextValue | null>(
+  null
+);
+
 export default function AlertFormProvider({
   children,
   initialState,
@@ -35,7 +60,6 @@ export default function AlertFormProvider({
 
   const addCity = useCallback((city: City) => {
     setState((prev) => {
-      // Check if city already exists
       const cityExists = prev.cities.some(
         (c) => c.name === city.name && c.postalCode === city.postalCode
       );
@@ -45,7 +69,6 @@ export default function AlertFormProvider({
       return {
         ...prev,
         cities: [...prev.cities, city],
-        showCitySearch: false,
       };
     });
   }, []);
@@ -54,20 +77,6 @@ export default function AlertFormProvider({
     setState((prev) => ({
       ...prev,
       cities: prev.cities.filter((city) => city.id !== cityId),
-    }));
-  }, []);
-
-  const openCitySearch = useCallback(() => {
-    setState((prev) => ({
-      ...prev,
-      showCitySearch: true,
-    }));
-  }, []);
-
-  const closeCitySearch = useCallback(() => {
-    setState((prev) => ({
-      ...prev,
-      showCitySearch: false,
     }));
   }, []);
 
@@ -101,32 +110,38 @@ export default function AlertFormProvider({
       propertyTypes: state.propertyTypes,
       saleType: state.saleType,
     };
-  }, [state.cities, state.propertyTypes, state.saleType]);
+  }, [state]);
 
-  const value = useMemo<AlertFormContextValue>(
+  const saveForm = useCallback(() => {
+    getFormData();
+  }, [getFormData]);
+
+  const deleteAlert = useCallback(() => {
+    resetForm();
+  }, [resetForm]);
+
+  const value: AlertFormContextValue = useMemo(
     () => ({
       state,
-      actions: {
-        addCity,
-        removeCity,
-        openCitySearch,
-        closeCitySearch,
-        togglePropertyType,
-        setSaleType,
-        resetForm,
-        getFormData,
-      },
+      addCity,
+      removeCity,
+      togglePropertyType,
+      setSaleType,
+      resetForm,
+      getFormData,
+      saveForm,
+      deleteAlert,
     }),
     [
       state,
       addCity,
       removeCity,
-      openCitySearch,
-      closeCitySearch,
       togglePropertyType,
       setSaleType,
       resetForm,
       getFormData,
+      saveForm,
+      deleteAlert,
     ]
   );
 
