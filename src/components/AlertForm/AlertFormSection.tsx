@@ -1,4 +1,4 @@
-import "./AlertForm.css";
+import "@/components/AlertForm/AlertForm.css";
 
 type AlertFormSectionProps = {
   title: string;

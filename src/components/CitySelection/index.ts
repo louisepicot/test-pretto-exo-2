@@ -1,1 +1,1 @@
-export { CitySelection } from "./CitySelection";
+export { CitySelection } from "@/components/CitySelection/CitySelection";

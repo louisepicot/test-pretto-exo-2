@@ -1,2 +1,2 @@
-export { AlertForm } from "./AlertForm";
-export { AlertFormSection } from "./AlertFormSection";
+export { AlertForm } from "@/components/AlertForm/AlertForm";
+export { AlertFormSection } from "@/components/AlertForm/AlertFormSection";
