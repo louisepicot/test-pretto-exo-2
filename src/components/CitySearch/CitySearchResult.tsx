@@ -1,26 +1,32 @@
-import type { MunicipalitySearchResult } from "@pretto/places/dist/types";
-import "./CitySearch.css";
+import type { City } from "@/lib/types";
+import { formatCityLabel } from "@/lib/utils";
+import "@/components/CitySearch/CitySearch.css";
+import { useSearchContext } from "@/hooks/useSearchContext";
+import { useAlertFormContext } from "@/hooks/useAlertFormContext";
 
 type CitySearchResultProps = {
-  result: MunicipalitySearchResult;
-  isSelected: boolean;
-  onSelect: (result: MunicipalitySearchResult) => void;
+  city: City;
 };
 
-export function CitySearchResult({
-  result,
-  isSelected,
-  onSelect,
-}: CitySearchResultProps) {
+export function CitySearchResult({ city }: CitySearchResultProps) {
+  const { handleChangeSearchText, closeSearch } = useSearchContext();
+  const { addCity } = useAlertFormContext();
+
+  const handleSelect = (city: City) => {
+    addCity(city);
+    handleChangeSearchText("");
+    closeSearch();
+  };
+
+  const label = formatCityLabel(city);
+
   return (
     <button
       type="button"
-      onClick={() => onSelect(result)}
-      className={`city-search__result ${
-        isSelected ? "city-search__result--selected" : ""
-      }`.trim()}
+      onClick={() => handleSelect(city)}
+      className="city-search__result"
     >
-      {result.label}
+      {label}
     </button>
   );
 }

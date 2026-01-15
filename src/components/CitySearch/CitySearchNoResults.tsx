@@ -1,15 +1,5 @@
-import "./CitySearch.css";
+import "@/components/CitySearch/CitySearch.css";
 
-type CitySearchNoResultsProps = {
-  className?: string;
-};
-
-export function CitySearchNoResults({
-  className = "",
-}: CitySearchNoResultsProps) {
-  return (
-    <div className={`city-search__no-results ${className}`.trim()}>
-      Aucun résultat trouvé
-    </div>
-  );
+export function CitySearchNoResults() {
+  return <div className="city-search__no-results">Aucun résultat trouvé</div>;
 }

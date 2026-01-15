@@ -1,51 +1,34 @@
-import { forwardRef } from "react";
+import { useRef, useEffect } from "react";
 import { LoadingSpinner } from "@/components/Icons";
-import "./CitySearch.css";
+import { useSearchContext } from "@/hooks/useSearchContext";
+import { MIN_SEARCH_LENGTH } from "@/lib/constants";
+import "@/components/CitySearch/CitySearch.css";
 
-type CitySearchInputProps = {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-  isLoading?: boolean;
-  placeholder?: string;
-  className?: string;
-};
+export function CitySearchInput() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { searchText, isLoading, handleChangeSearchText } = useSearchContext();
 
-export const CitySearchInput = forwardRef<
-  HTMLInputElement,
-  CitySearchInputProps
->(
-  (
-    {
-      value,
-      onChange,
-      onKeyDown,
-      isLoading = false,
-      placeholder = "Rechercher une ville...",
-      className = "",
-    },
-    ref
-  ) => {
-    return (
-      <div className={`city-search__input-wrapper ${className}`.trim()}>
-        <input
-          ref={ref}
-          type="text"
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          placeholder={placeholder}
-          className="city-search__input"
-        />
-        {isLoading && (
-          <LoadingSpinner
-            className="city-search__loading"
-            aria-label="Loading"
-          />
-        )}
-      </div>
-    );
-  }
-);
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
-CitySearchInput.displayName = "CitySearchInput";
+  const shouldShowLoading = isLoading && searchText.length >= MIN_SEARCH_LENGTH;
+
+  return (
+    <div className="city-search__input-wrapper">
+      <input
+        ref={inputRef}
+        type="text"
+        value={searchText}
+        onChange={(e) => handleChangeSearchText(e.target.value)}
+        placeholder="Rechercher une ville..."
+        className="city-search__input"
+      />
+      {shouldShowLoading && (
+        <div className="city-search__loading">
+          <LoadingSpinner />
+        </div>
+      )}
+    </div>
+  );
+}
