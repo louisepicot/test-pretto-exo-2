@@ -1,4 +1,4 @@
-import type { SALE_TYPES, PROPERTY_TYPES } from "./constants";
+import type { SALE_TYPES, PROPERTY_TYPES } from "@/lib/constants";
 
 export type City = {
   id: string;
@@ -17,27 +17,6 @@ export type PropertyTypes = {
 
 export type AlertFormState = {
   cities: City[];
-  showCitySearch: boolean;
   propertyTypes: PropertyTypes;
   saleType: SaleType;
-};
-
-export type AlertFormActions = {
-  addCity: (city: City) => void;
-  removeCity: (cityId: string) => void;
-  openCitySearch: () => void;
-  closeCitySearch: () => void;
-  togglePropertyType: (type: PropertyType) => void;
-  setSaleType: (type: SaleType) => void;
-  resetForm: () => void;
-  getFormData: () => {
-    cities: Array<{ name: string; postalCode: string }>;
-    propertyTypes: PropertyTypes;
-    saleType: SaleType;
-  };
-};
-
-export type AlertFormContextValue = {
-  state: AlertFormState;
-  actions: AlertFormActions;
 };

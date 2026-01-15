@@ -2,7 +2,7 @@
    CSS RESET / BASE
 ========================= */
 
-@import "./typography.css";
+@import "@/typography.css";
 
 *,
 *::before,
@@ -62,7 +62,7 @@ button {
   --color-text-primary: #0f172a;
   --color-text-secondary: #475569;
   --color-text-white: #ffffff;
-  --color-border: #D3D3D3;
+  --color-border: #d3d3d3;
   --color-accent: #0f766e;
   --color-accent-hover: #115e59;
   --color-btn-primary: #050505;
